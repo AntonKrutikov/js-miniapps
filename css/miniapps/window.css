@@ -62,6 +62,9 @@
     background-position: center;
     box-shadow: inset 1px 1px 0px #ffffff, inset -1px -1px 0px #000000, inset -2px -2px 0px #808080, inset 2px 2px 0px #dbdbdb;
 }
+.window-button.disabled{
+    background-blend-mode: soft-light;
+}
 .window-button-pushed {
     transform: translate(1px, 1px);
 }
@@ -81,6 +84,7 @@
     align-items: center;
     margin-bottom: 5px;
     height: 25px;
+    max-height: 25px;
 }
 .window-menubar > div {
     padding: 5px 10px;
@@ -94,4 +98,13 @@
     overflow: hidden;
     flex: 1;
     display: flex;
+}
+.window.maximized {
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+.disabled {
+    color: #737373;
 }

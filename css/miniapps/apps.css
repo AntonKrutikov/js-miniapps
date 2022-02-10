@@ -1,5 +1,6 @@
 @import url('./window.css');
 @import url('./wordpad.css');
+@import url('./musicplayer.css');
 
 .ui-windows-container {
     display: none;

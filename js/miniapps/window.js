@@ -2,9 +2,10 @@ export class Window {
     static last_zindex = 500
 
     // content is HTMLElement
-    constructor(content, config = {width: 'auto', height: 'auto', title:'', cssClass: undefined}, close_callback){
-        this.close_callback = close_callback
+    constructor(content, config = { width: 'auto', height: 'auto', title: '', cssClass: undefined, disable_maximize: false}, close_callback) {
         content.window = this
+        this.config = config
+        this.close_callback = close_callback
         // window itself
         this.container = document.createElement('div')
         this.container.classList.add('window')
@@ -32,6 +33,7 @@ export class Window {
         //window maximize
         this.maximize = document.createElement('div')
         this.maximize.classList.add('window-button', 'window-maximize')
+        if (config.disable_maximize) this.maximize.classList.add('disabled')
         this.bar.appendChild(this.maximize)
         // window bar close button
         this.close_button = document.createElement('div')
@@ -61,10 +63,10 @@ export class Window {
         // events
         this.bar.addEventListener('mousedown', (e) => {
             if (this.state.maximized === false) {
-            this.state.is_dragging = true
-            this.state.x_diff = e.pageX - this.state.x
-            this.state.y_diff = e.pageY - this.state.y
-            this.container.style.zIndex = Window.last_zindex++
+                this.state.is_dragging = true
+                this.state.x_diff = e.pageX - this.state.x
+                this.state.y_diff = e.pageY - this.state.y
+                this.container.style.zIndex = Window.last_zindex++
             }
         })
 
@@ -108,39 +110,25 @@ export class Window {
     }
 
     stretch() {
-        if (this.state.maximized === false) {
-            this.state.prev_height = this.container.clientHeight
-            this.state.prev_width = this.container.clientWidth
-            this.state.prev_top = this.container.offsetTop
-            this.state.prev_left = this.container.offsetLeft
-            this.container.style.width = '100%'
-            this.container.style.height = '100%'
-            this.container.style.top = '0'
-            this.container.style.left = '0'
-            this.container.classList.add('maximized')
-            this.state.maximized = true
-        } else {
-            this.container.style.width = `${this.state.prev_width}px`
-            this.container.style.height = `${this.state.prev_height}px`
-            this.container.style.top = `${this.state.prev_top}px`
-            this.container.style.left = `${this.state.prev_left}px`
-            this.state.prev_height = null
-            this.state.prev_width = null
-            this.state.prev_left = null
-            this.state.prev_top = null
-            this.container.classList.remove('maximized')
-            this.state.maximized = false
+        if (!this.config.disable_maximize) {
+            if (this.state.maximized === false) {
+                this.container.classList.add('maximized')
+                this.state.maximized = true
+            } else {
+                this.container.classList.remove('maximized')
+                this.state.maximized = false
+            }
         }
     }
 
     clampX(n) {
         return Math.min(Math.max(n, 0), window.innerWidth)
     }
-    
+
     clampY(n) {
         return Math.min(Math.max(n, 0), window.innerHeight);
     }
-    
+
     render() {
         this.container.style.left = `${this.state.x}px`
         this.container.style.top = `${this.state.y}px`
