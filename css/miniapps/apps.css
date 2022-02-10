@@ -1,5 +1,5 @@
-@import url('./css/miniapps/window.css');
-@import url('./css/miniapps/wordpad.css');
+@import url('./window.css');
+@import url('./wordpad.css');
 
 .ui-windows-container {
     display: none;
