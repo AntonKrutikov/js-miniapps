@@ -1,7 +1,7 @@
 import { FileMenu } from "./file-menu.js"
 
 export class MusicPlayer {
-    constructor () {
+    constructor() {
         this.container = document.createElement('div')
         this.container.classList.add('musicplayer')
         // menubar
@@ -66,27 +66,14 @@ export class MusicPlayer {
         this.volume_control.classList.add('musicplayer-volume')
         this.inner.appendChild(this.volume_control)
         // artist row
-        this.artist_row = document.createElement('div')
-        this.artist_row.classList.add('musicplayer-row', 'musicplayer-artist-row')
-        this.inner.appendChild(this.artist_row)
-        this.artist_row_name = document.createElement('div')
-        this.artist_row_name.classList.add('musicplayer-row-name')
-        this.artist_row_name.innerText = 'Artist'
-        this.artist_row.appendChild(this.artist_row_name)
-        this.artist_row_data = document.createElement('div')
-        this.artist_row_data.classList.add('musicplayer-row-data', 'musicplayer-artist-row-data')
-        this.artist_row.appendChild(this.artist_row_data)
-        this.artist_row_data_title = document.createElement('span')
-        this.artist_row_data_title.classList.add('musicplayer-row-data-title')
-        this.artist_row_data_title.innerText = 'Shadow Pals'
-        this.artist_row_data.appendChild(this.artist_row_data_title)
-        this.artist_row_data_index = document.createElement('span')
-        this.artist_row_data_index.innerText = '<01>'
-        this.artist_row_data_index.classList.add('musicplayer-row-data-index')
-        this.artist_row_data.appendChild(this.artist_row_data_index)
-        this.artist_row_data_arrow = document.createElement('div')
-        this.artist_row_data_arrow.classList.add('musicplayer-button','musicplayer-row-data-arrow')
-        this.artist_row_data.appendChild(this.artist_row_data_arrow)
+        this.artist_info = new Row('artist', 'Artist', 'Shadow Pals', '01', true)
+        this.inner.appendChild(this.artist_info.row)
+        // current track row
+        this.current_info = new Row('current', 'Title', 'track')
+        this.inner.appendChild(this.current_info.row)
+        // track list
+        this.list_info = new Row('list', 'Track List', '', '', true)
+        this.inner.appendChild(this.list_info.row)
 
         //events
         this.menubar_song.addEventListener('click', e => {
@@ -99,7 +86,7 @@ export class MusicPlayer {
             }
         })
 
-        let buttons = [this.navigation_back, this.navigation_play, this.navigation_next, this.navigation_pause, this.navigation_stop, this.artist_row_data_arrow]
+        let buttons = [this.navigation_back, this.navigation_play, this.navigation_next, this.navigation_pause, this.navigation_stop, this.artist_info.arrow, this.list_info.arrow]
         buttons.forEach(b => {
             b.addEventListener('mousedown', e => {
                 b.classList.add('window-button-pushed')
@@ -122,4 +109,38 @@ export class MusicPlayer {
         this.window.close()
     }
 
+}
+
+class Row {
+    constructor(cssPrefix, name, title, index, arrow) {
+        this.row = document.createElement('div')
+        this.row.classList.add('musicplayer-row', `musicplayer-${cssPrefix}-row`)
+
+        this.name = document.createElement('div')
+        this.name.classList.add('musicplayer-row-name')
+        this.name.innerText = name
+        this.row.appendChild(this.name)
+
+        this.data = document.createElement('div')
+        this.data.classList.add('musicplayer-row-data', `musicplayer-${cssPrefix}-row-data`)
+        this.row.appendChild(this.data)
+
+        this.title = document.createElement('span')
+        this.title.classList.add('musicplayer-row-data-title')
+        this.title.innerText = title
+        this.data.appendChild(this.title)
+
+        if (index) {
+            this.index = document.createElement('span')
+            this.index.innerText = `<${index}>`
+            this.index.classList.add('musicplayer-row-data-index')
+            this.data.appendChild(this.index)
+        }
+
+        if (arrow) {
+            this.arrow = document.createElement('div')
+            this.arrow.classList.add('musicplayer-button', 'musicplayer-row-data-arrow')
+            this.data.appendChild(this.arrow)
+        }
+    }
 }
