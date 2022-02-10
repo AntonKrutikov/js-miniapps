@@ -1,0 +1,11 @@
+@import url('/css/miniapps/window.css');
+@import url('/css/miniapps/wordpad.css');
+
+.ui-windows-container {
+    display: none;
+}
+
+.ui_icon.ui_icon__wordpad:hover:active > .icon-workspace, .ui_icon.ui_icon__wordpad:hover:active > .txt-icon-normal{
+    background-color: blue;
+    color: #fff;
+}
