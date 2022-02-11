@@ -6,7 +6,13 @@
     display: none;
 }
 
-.ui_icon.ui_icon__wordpad:hover:active > .icon-workspace, .ui_icon.ui_icon__wordpad:hover:active > .txt-icon-normal{
+.ui_icon.ui_icon__wordpad:hover:active > .icon-workspace, .ui_icon.ui_icon__wordpad:hover:active > .txt-icon-normal,
+.ui_icon.ui_icon__music-player:hover:active > .icon-workspace, .ui_icon.ui_icon__music-player:hover:active > .txt-icon-normal
+{
     background-color: blue;
     color: #fff;
+}
+
+#footer {
+    z-index: 2000;
 }

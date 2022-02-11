@@ -68,6 +68,7 @@
     padding: 5px;
     min-width: 160px;
     cursor: auto;
+    z-index: 2;
 }
 .wordpad-menu hr {
     width: 165px;
