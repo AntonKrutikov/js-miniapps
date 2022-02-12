@@ -1,7 +1,8 @@
 .ui-window {
     font-family: 'Ms sans serif 8pt';
     font-size: 11px;
-
+    left: 50%;
+    top: 50%;
 
 }
 .window-button-pushed {
