@@ -5,7 +5,7 @@ import { MusicPlayer} from "./musicplayer.js"
 // Wordpad init
 // let wordpad_ico = document.querySelector('.ui_icon.ui_icon__wordpad')
 // wordpad_ico.addEventListener('dblclick', e => {
-    let wordpad = new Window(new Wordpad(), {target: '.ui-window.ui_window_notepad'})
+    let wordpad = new Window(new Wordpad(), {target: '.ui-window.ui_window_notepad-copy'})
     wordpad.show()
 // })
 
