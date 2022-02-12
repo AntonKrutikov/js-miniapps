@@ -1,9 +1,15 @@
 .window.wordpad-app .window-icon {
     background-image: url('/images/icon-word-pad.svg');
 }
-.window.wordpad-app {
-    min-width: 200px;
-    min-height: 200px;
+.ui-window.ui_window_notepad {
+    min-width: 250px;
+    min-height: 250px;
+    max-width: 100%;
+    max-height: 100%;
+    position: absolute;
+    overflow: hidden;
+    background: #bfbfbf;
+    resize: both;
 }
 .wordpad {
     flex: 1;

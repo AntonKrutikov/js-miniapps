@@ -1,82 +1,10 @@
-@font-face {
-    font-family: 'MS-Sans-Serif' ;
-    src: url('/fonts/MS-Sans-Serif-8pt.ttf');
-    font-weight: normal;
-}
-@font-face {
-    font-family: 'MS-Sans-Serif' ;
-    src: url('/fonts/MS-Sans-Serif-8pt-bold.ttf');
-    font-weight: bold;
-}
-.window {
-    font-family: 'MS-Sans-Serif';
+.ui-window {
+    font-family: 'Ms sans serif 8pt';
     font-size: 11px;
-    position: absolute;
-    left: 0;
-    top: 0;
-    display: flex;
-    flex-direction: column;
-    /* box-shadow: 2px 2px 2px rgba(100, 100, 100, 0.5); */
-    border-style: outset;
-    max-width: 100%;
-    max-height: 100%;
-    overflow: hidden;
-    background: #bfbfbf;
-    resize: both;
-}
-.window-bar {
-    font-weight: bold;
-    color: #fff;
-    /* background: linear-gradient(90deg, rgb(128, 177, 255), rgb(187, 239, 255)); */
-    background: linear-gradient(270deg, #1085D2 0%, #00007B 100%);
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-end;
-    padding: 5px;
-    /* cursor: move; */
-    height: 23px;
-}
-.window.maximized > .window-bar {
-    cursor: unset;
-}
-.window-icon {
-    width: 16px;
-    height: 16px;
-    background-size: contain;
-    background-repeat: no-repeat;
-    margin: 8px;
-}
-.window-title {
-    flex: 1;
-    text-align: left;
-    user-select: none;
-}
-.window-button {
-    cursor: auto;
-    width: 18px;
-    height: 18px;
-    margin-right: 2px;
-    background-color: #bfbfbf;
-    background-repeat: no-repeat;
-    background-position: center;
-    box-shadow: inset 1px 1px 0px #ffffff, inset -1px -1px 0px #000000, inset -2px -2px 0px #808080, inset 2px 2px 0px #dbdbdb;
-}
-.window-button.disabled{
-    background-blend-mode: soft-light;
+
 }
 .window-button-pushed {
     transform: translate(1px, 1px);
-}
-.window-minimize {
-    background-image: url('/images/icon-minimize2.svg');
-    background-size: 12px 9px;
-}
-.window-maximize {
-  background-image: url('/images/icon-maximize.svg');
-}
-.window-close {
-    background-image: url('/images/icon-close.svg');
 }
 .window-menubar {
     display: flex;
@@ -99,11 +27,10 @@
     flex: 1;
     display: flex;
 }
-.window.maximized {
-    left: 0 !important;
-    top: 0 !important;
+.ui-window.maximized {
+    transform: translate(0,0) !important;
     width: 100% !important;
-    height: calc(100% - 36px) !important;
+    height: 100% !important;
 }
 .disabled {
     color: #737373;
