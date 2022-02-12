@@ -693,9 +693,9 @@
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  -webkit-transform: translate(72vw, 10vh);
+  /* -webkit-transform: translate(72vw, 10vh);
   -ms-transform: translate(72vw, 10vh);
-  transform: translate(72vw, 10vh);
+  transform: translate(72vw, 10vh); */
 }
 
 .ui-window.ui_window_notepad.move-grap {

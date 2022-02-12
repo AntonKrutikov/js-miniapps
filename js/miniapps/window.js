@@ -31,10 +31,10 @@ export class Window {
     stretch() {
         if (!this.config.disable_maximize) {
             if (this.state.maximized === false) {
-                this.container.classList.add('maximized')
+                // this.container.classList.add('maximized')
                 this.state.maximized = true
             } else {
-                this.container.classList.remove('maximized')
+                // this.container.classList.remove('maximized')
                 this.state.maximized = false
             }
         }
