@@ -1,7 +1,7 @@
 .window.wordpad-app .window-icon {
     background-image: url('/images/icon-word-pad.svg');
 }
-.ui-window.ui_window_notepad {
+.ui-window.ui_window_notepad-copy {
     min-width: 250px;
     min-height: 250px;
     max-width: 100%;
