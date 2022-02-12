@@ -11,6 +11,8 @@
     background: #bfbfbf;
     resize: both;
     display: flex;
+    left: 0;
+    top: 0;
 }
 .wordpad {
     flex: 1;
