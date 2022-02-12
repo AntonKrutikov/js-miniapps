@@ -51,9 +51,9 @@ export class Window {
     }
 
     render() {
-        // this.container.style.left = `${this.state.x}px`
-        // this.container.style.top = `${this.state.y}px`
-        this.container.style.transform = 'translate(' + this.state.x + 'px, ' + this.state.y + 'px)';
+        this.container.style.left = `${this.state.x}px`
+        this.container.style.top = `${this.state.y}px`
+        // this.container.style.transform = 'translate(' + this.state.x + 'px, ' + this.state.y + 'px)';
     }
 
     init() {
