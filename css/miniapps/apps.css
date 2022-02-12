@@ -3,7 +3,7 @@
 @import url('./musicplayer.css');
 
 .ui-windows-container {
-    display: none;
+    /* display: none; */
 }
 
 .ui_icon.ui_icon__wordpad:hover:active > .icon-workspace, .ui_icon.ui_icon__wordpad:hover:active > .txt-icon-normal,

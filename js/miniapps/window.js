@@ -136,7 +136,21 @@ export class Window {
     }
 
     show() {
-        document.body.appendChild(this.container)
+        let t = document.querySelector('.ui-window.ui_window_notepad')
+        let header = t.querySelector('.head-ui-window')
+        header.classList.add('window-bar')
+        t.querySelectorAll(':scope > :not(.head-ui-window)').forEach(el => {
+            console.log(el)
+            t.removeChild(el)
+        })
+        t.classList.add('window')
+        // let old_header = t.querySelector('.head-menu-window')
+        // let old_body = t.querySelector('.ui_window__body')
+        // t.removeChild(old_header)
+        // t.removeChild(old_body)
+        let inner = t.querySelector('.ui_window__body')
+
+        t.appendChild(this.inner)
         this.render()
     }
 
