@@ -5,7 +5,7 @@
     left: 0 !important;
     top: 0 !important;
     width: 100% !important;
-    height: calc(100% - 36px) !important;
+    height: 100% !important;
 }
 .ui-window.no-resize {
     resize: none !important;
