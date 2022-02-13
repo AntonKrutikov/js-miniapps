@@ -91,7 +91,7 @@ export class WindowManager {
                     w.classList.remove('transition_maximize')
                 }, 500)
 
-                if (!w.classList.contains('maximized')) {
+                if (!btn.classList.contains('maximized')) {
                     const rect = w.getBoundingClientRect()
                     w.style.width = rect.width+'px'
                     w.style.height = rect.height+'px'
