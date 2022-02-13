@@ -21,6 +21,8 @@ export class WindowManager {
             this.decorateButtons(w)
             // Maximize
             this.allowMaximize(w)
+            // Close
+            this.cleanOnClose(w)
         })
     }
 
@@ -116,5 +118,12 @@ export class WindowManager {
                 w.classList.remove('no-resize')
             }
         }
+    }
+
+    cleanOnClose(w) {
+        const close = w.querySelector('.ui_window__head__close')
+        close?.addEventListener('click', e => {
+            this.container.classList.remove('maximized')
+        })
     }
 }

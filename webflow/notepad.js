@@ -46,6 +46,7 @@ export class Notepad {
     }
 
     close() {
+        this.textarea.value = ''
         this.container.style.display = 'none'
         this.container.classList.remove('maximized')
     }
