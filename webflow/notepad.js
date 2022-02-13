@@ -20,11 +20,11 @@ export class Notepad {
         const saveFileAs = this.container.querySelector('.ui_menu_save_as')
         const quit = this.container.querySelector('.ui_menu_quit')
         const all = [newFile, saveFile, saveFileAs, quit]
-        const menu = $('.ui_menu_file')
+        const menu = this.container.querySelector('.ui_menu_file')
         all.forEach(m => {
             m?.addEventListener('click', e => {
                 e.preventDefault()
-                menu.parent().trigger('w-close')
+                menu?.parentElement?.dispatchEvent(new Event('w-close'))
             })
         })
 
@@ -46,7 +46,7 @@ export class Notepad {
     }
 
     close() {
-        console.log(99)
+        this.container.style.display = 'none'
         this.container.classList.remove('maximized')
     }
 }
