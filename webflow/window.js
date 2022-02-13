@@ -97,8 +97,10 @@ export class WindowManager {
                     const rect = w.getBoundingClientRect()
                     w.style.width = rect.width+'px'
                     w.style.height = rect.height+'px'
-                    w.classList.add('maximized')
-                    w.classList.add('no-resize')
+                    setTimeout(() => {
+                        w.classList.add('maximized')
+                        w.classList.add('no-resize')
+                    }, 100)
                 } else {
                     w.classList.remove('maximized')
                     w.classList.remove('no-resize')
