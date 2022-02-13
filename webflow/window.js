@@ -8,7 +8,7 @@ export class WindowManager {
 
     init() {
         document.querySelectorAll(this.selector).forEach(w => {
-           
+
             // Collect all windows from page and add state
             w.state = {}
             WindowManager.windows.push(w)
@@ -17,6 +17,8 @@ export class WindowManager {
             this.zIndexing(w)
             // Draggable
             this.makeDragable(w)
+            // Buttons animation
+            this.addButtonsAnimation(w)
             // Maximize
             this.allowMaximize(w)
         })
@@ -60,21 +62,43 @@ export class WindowManager {
 
     }
 
+    addButtonsAnimation(w) {
+        const minimize = w.querySelector('.ui_window__head__minimize')
+        const maximize = w.querySelector('.ui_window__head__maximize')
+        const close = w.querySelector('.ui_window__head__close')
+        const buttons = [minimize, maximize, close]
+        buttons.forEach(b => {
+            if (b) {
+                b.addEventListener('mousedown', e => {
+                    b.classList.add('button-pushed')
+                })
+                document.addEventListener('mouseup', e => {
+                    b.classList.remove('button-pushed')
+                })
+                b.addEventListener('mouseleave', e => {
+                    b.classList.remove('button-pushed')
+                })
+            }
+        })
+    }
+
     allowMaximize(w) {
         const btn = w.querySelector('.ui_window__head__maximize')
-        if (!btn.classList.contains('button-disabled')) {
-            w.classList.add('transition_maximize')
-            setTimeout(() => {
-                w.classList.remove('transition_maximize')
-            }, 500)
+        btn?.addEventListener('click', e => {
+            if (!btn.classList.contains('button-disabled')) {
+                w.classList.add('transition_maximize')
+                setTimeout(() => {
+                    w.classList.remove('transition_maximize')
+                }, 500)
 
-            if (!w.classList.contains('maximized')) {
-                w.classList.add('maximized')
-                w.classList.add('no-resize')
-            } else {
-                w.classList.remove('maximized')
-                w.classList.remove('no-resize')
+                if (!w.classList.contains('maximized')) {
+                    w.classList.add('maximized')
+                    w.classList.add('no-resize')
+                } else {
+                    w.classList.remove('maximized')
+                    w.classList.remove('no-resize')
+                }
             }
-        }
+        })
     }
 }

@@ -10,3 +10,6 @@
 .ui-window.no-resize {
     resize: none !important;
 }
+.button-pushed {
+    transform: translate(1px, 1px);
+}
