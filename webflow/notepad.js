@@ -10,6 +10,6 @@ export class Notepad {
         this.textarea = document.createElement('textarea')
         this.textarea.classList.add('notepad-app-textarea')
 
-        if (section) document.replaceChild(this.textarea, section)
+        if (section) section.replaceWith(this.textarea)
     }
 }
