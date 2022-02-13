@@ -24,6 +24,7 @@ export class Notepad {
         const all = [newFile, saveFile, saveFileAs, quit]
         all.forEach(m => {
             m?.addEventListener('click', e => {
+                e.preventDefault()
                 menu?.classList.remove('w--open')
                 menuheader?.setAttribute('aria-expanded', 'false')
             })
