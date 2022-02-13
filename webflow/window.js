@@ -84,14 +84,15 @@ export class WindowManager {
 
     allowMaximize(w) {
         const btn = w.querySelector('.ui_window__head__maximize')
+        const img = btn?.querySelector('img')
         btn?.addEventListener('click', e => {
-            if (!btn.classList.contains('button-disabled')) {
+            if (!img?.classList.contains('button-disabled')) {
                 w.classList.add('transition_maximize')
                 setTimeout(() => {
                     w.classList.remove('transition_maximize')
                 }, 500)
 
-                if (!btn.classList.contains('maximized')) {
+                if (!w.classList.contains('maximized')) {
                     const rect = w.getBoundingClientRect()
                     w.style.width = rect.width+'px'
                     w.style.height = rect.height+'px'
