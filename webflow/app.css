@@ -16,3 +16,8 @@
 .ui-window.head-ui-window {
     cursor: unset !important;
 }
+
+/* Notepad */
+.ui-window.ui_window_notepad {
+    resize: both;
+}
