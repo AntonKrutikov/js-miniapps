@@ -49,7 +49,7 @@ export class Notepad {
     }
 
     close() {
-        this.container.style.display = 'none'
+        console.log(99)
         this.container.classList.remove('maximized')
     }
 }
