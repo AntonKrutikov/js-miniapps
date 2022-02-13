@@ -22,7 +22,6 @@ export class WindowManager {
             // Maximize
             this.allowMaximize(w)
         })
-        console.log(WindowManager.windows)
     }
 
     zIndexing(w) {

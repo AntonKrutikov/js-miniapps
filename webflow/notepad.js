@@ -19,15 +19,10 @@ export class Notepad {
         const saveFile = this.container.querySelector('.ui_menu_save')
         const saveFileAs = this.container.querySelector('.ui_menu_save_as')
         const quit = this.container.querySelector('.ui_menu_quit')
-        const menu = this.container.querySelector('.ui_menu_file.w-dropdown-list')
-        const menuheader = this.container.querySelector('.ui_menu__item--opener.w-dropdown-toggle')
         const all = [newFile, saveFile, saveFileAs, quit]
         all.forEach(m => {
             m?.addEventListener('click', e => {
                 e.preventDefault()
-                menu?.classList.remove('w--open')
-                menuheader?.setAttribute('aria-expanded', 'false')
-                menuheader?.classList.remove('w--open')
             })
         })
 
