@@ -20,9 +20,11 @@ export class Notepad {
         const saveFileAs = this.container.querySelector('.ui_menu_save_as')
         const quit = this.container.querySelector('.ui_menu_quit')
         const all = [newFile, saveFile, saveFileAs, quit]
+        const menu = this.container.querySelector('.ui_menu_file')
         all.forEach(m => {
             m?.addEventListener('click', e => {
                 e.preventDefault()
+                menu?.parentElement?.click()
             })
         })
 

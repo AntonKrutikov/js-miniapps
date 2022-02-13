@@ -28,6 +28,7 @@
 .ui_window_notepad textarea {
     min-height: 1em;
     font-family: 'Ms sans serif 8pt', sans-serif;
+    font-size: 12px;
     box-sizing: border-box;
     margin: 0 3px;
     width: calc(100% - 6px);
