@@ -37,6 +37,7 @@
 }
 
 .ui_window_notepad textarea::after {
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
