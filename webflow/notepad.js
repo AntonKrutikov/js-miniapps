@@ -6,7 +6,7 @@ export class Notepad {
     }
 
     createTextarea() {
-        const section = this.container.querySelector('wf-section')
-        this.container.removeChild(section)
+        const section = this.container.querySelector('.wf-section')
+        if (section) this.container.removeChild(section)
     }
 }
