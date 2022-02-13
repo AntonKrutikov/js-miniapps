@@ -27,6 +27,7 @@ export class Notepad {
                 e.preventDefault()
                 menu?.classList.remove('w--open')
                 menuheader?.setAttribute('aria-expanded', 'false')
+                menuheader?.classList.remove('w--open')
             })
         })
 
