@@ -92,6 +92,9 @@ export class WindowManager {
                 }, 500)
 
                 if (!w.classList.contains('maximized')) {
+                    const rect = w.getBoundingClientRect()
+                    w.style.width = rect.width+'px'
+                    w.style.height = rect.height+'px'
                     w.classList.add('maximized')
                     w.classList.add('no-resize')
                 } else {
