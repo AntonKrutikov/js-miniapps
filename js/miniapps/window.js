@@ -33,9 +33,6 @@ export class Window {
                 this.container.classList.remove('transitions')
             }, 500)
             if (this.state.maximized === false) {
-                const rect = this.container.getBoundingClientRect()
-                this.container.style.width = rect.width+'px'
-                this.container.style.height = rect.height+'px'
                 this.container.classList.add('maximized')
                 this.state.maximized = true
             } else {
@@ -128,6 +125,11 @@ export class Window {
 
         this.container.appendChild(this.inner)
         this.render()
+
+        // Set width/height to style as current
+        const rect = this.container.getBoundingClientRect()
+        this.container.style.width = rect.width+'px'
+        this.container.style.height = rect.height+'px'
     }
 
     close() {
