@@ -1,4 +1,4 @@
-class WindowManager {
+export class WindowManager {
     static windows = []
     static zIndex = 100
 
