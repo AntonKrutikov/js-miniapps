@@ -111,7 +111,7 @@ export class WindowManager {
                 setTimeout(() => {
                     w.classList.add('maximized')
                     w.classList.add('no-resize')
-                }, 100)
+                }, 10)
             } else {
                 w.classList.remove('maximized')
                 w.classList.remove('no-resize')
