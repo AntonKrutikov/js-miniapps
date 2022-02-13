@@ -17,8 +17,8 @@ export class WindowManager {
             this.zIndexing(w)
             // Draggable
             this.makeDragable(w)
-            // Buttons animation
-            this.addButtonsAnimation(w)
+            // Buttons animation and events stop
+            this.decorateButtons(w)
             // Maximize
             this.allowMaximize(w)
         })
@@ -62,7 +62,7 @@ export class WindowManager {
 
     }
 
-    addButtonsAnimation(w) {
+    decorateButtons(w) {
         const minimize = w.querySelector('.ui_window__head__minimize')
         const maximize = w.querySelector('.ui_window__head__maximize')
         const close = w.querySelector('.ui_window__head__close')
@@ -70,6 +70,7 @@ export class WindowManager {
         buttons.forEach(b => {
             if (b) {
                 b.addEventListener('mousedown', e => {
+                    e.stopPropagation()
                     b.classList.add('button-pushed')
                 })
                 document.addEventListener('mouseup', e => {
