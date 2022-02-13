@@ -13,7 +13,7 @@
 .button-pushed {
     transform: translate(1px, 1px);
 }
-.ui-window.head-ui-window {
+.head-ui-window, .title-window-header  {
     cursor: unset !important;
 }
 
