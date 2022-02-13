@@ -74,6 +74,9 @@ export class WindowManager {
                     e.stopPropagation()
                     b.classList.add('button-pushed')
                 })
+                b.addEventListener('dblclick', e => {
+                    e.stopPropagation()
+                })
                 document.addEventListener('mouseup', e => {
                     b.classList.remove('button-pushed')
                 })
