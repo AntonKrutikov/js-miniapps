@@ -2,8 +2,11 @@
     font-family: 'Ms sans serif 8pt';
     font-size: 11px;
 }
-.transitions {
+.ui-window.transitions {
     transition: width 0.3s ease, height 0.3s ease, left 0.3s ease, top 0.3s ease;
+}
+.ui-window.no-resize {
+    resize: none !important;
 }
 .window-button-pushed {
     transform: translate(1px, 1px);

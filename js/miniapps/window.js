@@ -34,9 +34,11 @@ export class Window {
             }, 500)
             if (this.state.maximized === false) {
                 this.container.classList.add('maximized')
+                this.container.classList.add('no-resize')
                 this.state.maximized = true
             } else {
                 this.container.classList.remove('maximized')
+                this.container.classList.remove('no-resize')
                 this.state.maximized = false
             }
         }
