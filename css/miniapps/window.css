@@ -1,7 +1,9 @@
 .ui-window {
     font-family: 'Ms sans serif 8pt';
     font-size: 11px;
-
+}
+.transitions {
+    transition: width 0.3s ease, height 0.3s ease, left 0.3s ease, top 0.3s ease;
 }
 .window-button-pushed {
     transform: translate(1px, 1px);

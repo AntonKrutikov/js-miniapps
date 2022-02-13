@@ -24,17 +24,22 @@ export class Window {
             maximized: false
         }
 
-
-
     }
 
     stretch() {
         if (!this.config.disable_maximize) {
+            this.container.classList.add('transitions')
+            setTimeout(() => {
+                this.container.classList.remove('transitions')
+            }, 500)
             if (this.state.maximized === false) {
-                // this.container.classList.add('maximized')
+                const rect = this.container.getBoundingClientRect()
+                this.container.style.width = rect.width+'px'
+                this.container.style.height = rect.height+'px'
+                this.container.classList.add('maximized')
                 this.state.maximized = true
             } else {
-                // this.container.classList.remove('maximized')
+                this.container.classList.remove('maximized')
                 this.state.maximized = false
             }
         }
@@ -51,9 +56,9 @@ export class Window {
     }
 
     render() {
-        // this.container.style.left = `${this.state.x}px`
-        // this.container.style.top = `${this.state.y}px`
-        this.container.style.transform = 'translate(' + this.state.x + 'px, ' + this.state.y + 'px)';
+        this.container.style.left = `${this.state.x}px`
+        this.container.style.top = `${this.state.y}px`
+        // this.container.style.transform = 'translate(' + this.state.x + 'px, ' + this.state.y + 'px)';
     }
 
     init() {
