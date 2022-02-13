@@ -86,26 +86,36 @@ export class WindowManager {
     allowMaximize(w) {
         const btn = w.querySelector('.ui_window__head__maximize')
         const img = btn?.querySelector('img')
-        btn?.addEventListener('click', e => {
-            if (!img?.classList.contains('button-disabled')) {
-                w.classList.add('transition_maximize')
-                setTimeout(() => {
-                    w.classList.remove('transition_maximize')
-                }, 500)
+        const head = w.querySelector('.head-ui-window')
 
-                if (!w.classList.contains('maximized')) {
-                    const rect = w.getBoundingClientRect()
-                    w.style.width = rect.width+'px'
-                    w.style.height = rect.height+'px'
-                    setTimeout(() => {
-                        w.classList.add('maximized')
-                        w.classList.add('no-resize')
-                    }, 100)
-                } else {
-                    w.classList.remove('maximized')
-                    w.classList.remove('no-resize')
-                }
-            }
+        btn?.addEventListener('click', e => {
+            this.maximize(w, btn, img)
         })
+
+        head?.addEventListener('dblclick', e => {
+            this.maximize(w, btn, img)
+        })
+    }
+
+    maximize(w, btn, img) {
+        if (!img?.classList.contains('button-disabled')) {
+            w.classList.add('transition_maximize')
+            setTimeout(() => {
+                w.classList.remove('transition_maximize')
+            }, 500)
+
+            if (!w.classList.contains('maximized')) {
+                const rect = w.getBoundingClientRect()
+                w.style.width = rect.width+'px'
+                w.style.height = rect.height+'px'
+                setTimeout(() => {
+                    w.classList.add('maximized')
+                    w.classList.add('no-resize')
+                }, 100)
+            } else {
+                w.classList.remove('maximized')
+                w.classList.remove('no-resize')
+            }
+        }
     }
 }
