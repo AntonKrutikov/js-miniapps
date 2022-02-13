@@ -123,7 +123,7 @@ export class WindowManager {
     cleanOnClose(w) {
         const close = w.querySelector('.ui_window__head__close')
         close?.addEventListener('click', e => {
-            this.container.classList.remove('maximized')
+            w.classList.remove('maximized')
         })
     }
 }
