@@ -1,0 +1,12 @@
+.ui-window.transition_maximize {
+    transition: width 0.3s ease, height 0.3s ease, left 0.3s ease, top 0.3s ease;
+}
+.ui-window.maximized {
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+.ui-window.no-resize {
+    resize: none !important;
+}

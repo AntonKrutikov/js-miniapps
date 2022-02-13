@@ -17,6 +17,8 @@ export class WindowManager {
             this.zIndexing(w)
             // Draggable
             this.makeDragable(w)
+            // Maximize
+            this.allowMaximize(w)
         })
         console.log(WindowManager.windows)
     }
@@ -56,5 +58,23 @@ export class WindowManager {
             }
         })
 
+    }
+
+    allowMaximize(w) {
+        const btn = w.querySelector('.ui_window__head__maximize')
+        if (!btn.classList.contains('button-disabled')) {
+            w.classList.add('transition_maximize')
+            setTimeout(() => {
+                w.classList.remove('transition_maximize')
+            }, 500)
+
+            if (!w.classList.contains('maximized')) {
+                w.classList.add('maximized')
+                w.classList.add('no-resize')
+            } else {
+                w.classList.remove('maximized')
+                w.classList.remove('no-resize')
+            }
+        }
     }
 }
