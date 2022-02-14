@@ -66,7 +66,7 @@ export class MusicPlayer {
         this.dropDownArtistList = this.dropDownArtist?.querySelector('nav')
         this.dropDownArtistList?.replaceChildren()
         this.dropDownArtistCurrentTitle = this.dropDownArtist?.querySelector('.toggle-dropdown-artist > div')
-        this.dropDownSongsCurrentTitle?.innerText = this.playlist?.artist
+        if (this.dropDownArtistCurrentTitle) this.dropDownArtistCurrentTitle.innerText = this.playlist?.artist
         const artistRow = document.createElement('a')
         artistRow.classList.add('musicplayer-dropdown-row', 'w-dropdown-link')
         artistRow.setAttribute('draggable', 'false')
