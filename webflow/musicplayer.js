@@ -3,6 +3,7 @@ export class MusicPlayer {
         this.container = document.querySelector(selector)
         this.playlist = playlist ? playlist : {artist: '', tracks: []}
         this.currentTrackID = 0
+        this.currentTrack = undefined
 
         // Buttons
         this.btnPrev = this.container?.querySelector('.button-controls-previous')
@@ -90,7 +91,9 @@ export class MusicPlayer {
     }
 
     setTrack(id) {
-        this.currentTrackID(id)
+        this.currentTrackID = id
+        this.currentTrack = this.playlist.tracks[id]
+        this.dropDownSongsSelected.innerText = this.currentTrack.title
     }
 
     close() {
