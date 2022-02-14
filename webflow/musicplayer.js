@@ -170,6 +170,8 @@ export class MusicPlayer {
         if (this.currentTrackTitle) this.currentTrackTitle.innerText = `${id+1}. ${this.currentTrack.title}`
         if (this.displayCurrentID) this.displayCurrentID.innerText = `[${(id+1).toString().padStart(2, '0')}]`
 
+        this.audio.pause()
+        this.audio.currentTime = null
         this.audio.src = this.currentTrack.src
         if (!this.paused) {
             this.audio.play()
