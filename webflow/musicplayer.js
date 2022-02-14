@@ -24,6 +24,8 @@ export class MusicPlayer {
                 b.classList.remove('button-pushed')
             })
         })
+
+        this.assignMenu()
     }
 
     assignMenu() {
