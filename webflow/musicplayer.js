@@ -4,6 +4,7 @@ export class MusicPlayer {
         this.playlist = playlist ? playlist : {artist: '', tracks: []}
         this.currentTrackID = 0
         this.currentTrack = undefined
+        this.paused = true
 
         // Buttons
         this.btnPrev = this.container?.querySelector('.button-controls-previous')
@@ -26,6 +27,22 @@ export class MusicPlayer {
             b?.addEventListener('mouseleave', e => {
                 b.classList.remove('button-pushed')
             })
+        })
+
+        this.btnPlay?.addEventListener('click', e => {
+            this.audio.play()
+            this.paused = false
+        })
+
+        this.btnPause?.addEventListener('click', e => {
+            this.audio.pause()
+            this.paused = true
+        })
+
+        this.btnStop?.addEventListener('click', e => {
+            this.audio.pause()
+            this.audio.currentTime = null
+            this.paused = true
         })
 
         // Lists
@@ -74,7 +91,7 @@ export class MusicPlayer {
     }
 
     assignMenu() {
-        const menu = this.container.querySelector('.ui_menu_file')
+        const menu = this.container.querySelector('.ui_menu_song')
 
         menu?.querySelectorAll('.ui_menu_file_row').forEach(a => {
             a.setAttribute('draggable', 'false')
@@ -108,6 +125,8 @@ export class MusicPlayer {
         if (this.dropDownSongsCurrentTitle) this.dropDownSongsCurrentTitle.innerText = this.currentTrack.title
         if (this.dropDownSongsCurrentID) this.dropDownSongsCurrentID.innerText = `<${id.toString().padStart(2, '0')}>`
         if (this.currentTrackTitle) this.currentTrackTitle.innerText = `${id}. ${this.currentTrack.title}`
+
+        this.audio.src = this.currentTrack.src
     }
 
     close() {

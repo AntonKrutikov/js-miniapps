@@ -9,9 +9,11 @@ window.addEventListener('load', e => {
     const notepad = new Notepad('.ui_window_notepad')
 
     const playlist = {
-        artist: 'Shadow Pals',
+        artist: 'Peacemaker OST',
         tracks: [
-            {src: '123', title: 'test track'}
+            {src: 'https://jsapps.13m.space/mp3/Wig_Wam_-_Do_Ya_Wanna_Taste_It_(musmore.com).mp3', title: 'Do Ya Wanna Taste It'},
+            {src: 'https://jsapps.13m.space/mp3/The_Quireboys_-_I_Dont_Love_You_Anymore_(musmore.com).mp3', title: 'I Dont Love You Anymore'},
+            {src: 'https://jsapps.13m.space/mp3/foxy_shazam_welcome_to_the_church_of_rock_and_roll_(NaitiMP3.ru).mp3', title: 'Welcome to the church of Rock and Roll'},
         ]
     }
     const musicplayer = new MusicPlayer('.ui_window_music', playlist)
