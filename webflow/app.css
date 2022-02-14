@@ -54,3 +54,25 @@
 .musicplayer-dropdown-row-id {
     padding-right: 15px;
 }
+.musicplayer-volume {
+    -webkit-appearance: none;
+    height: 4px;
+    align-self: center;
+    justify-self: end;
+    width: 100%;
+    background: #BFBFBF;
+    box-shadow: inset -1px -1px 0px #FFFFFF, inset 1px 1px 0px #808080, inset -2px -2px 0px #DFDFDF, inset 2px 2px 0px #000000;
+}
+.musicplayer-volume:focus {
+    outline: none;
+}
+.musicplayer-volume::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 11px;
+    height: 21px;
+    border: 0;
+    background: url('/images/icon-range-volume.svg');
+    background-repeat: no-repeat;
+    cursor: pointer;
+  }

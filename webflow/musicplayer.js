@@ -54,6 +54,13 @@ export class MusicPlayer {
             this.nextTrack()
         })
 
+        // Volume
+        this.volumeControl = document.createElement('input')
+        this.volumeControl.type = 'range'
+        this.volumeControl.classList.add('musicplayer-volume')
+        const volumeTarget = this.container.querySelector('.range-volume')
+        volumeTarget.replaceWith(this.volumeControl)
+
         // Lists
         this.dropDownArtist = this.container?.querySelector('.drop-down-artist')
         this.dropDownArtistList = this.dropDownArtist?.querySelector('nav')
