@@ -144,6 +144,12 @@ export class MusicPlayer {
             })
         })
 
+        this.volumeControl.addEventListener('input', e => {
+            this.audio.volume = e.target.value / 100
+        })
+
+        this.audio.volume = this.volumeControl.value / 100
+
 
         this.setTrack(0)
         this.assignMenu()
