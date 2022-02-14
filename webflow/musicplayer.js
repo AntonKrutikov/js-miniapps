@@ -38,20 +38,27 @@ export class MusicPlayer {
 
         this.dropDownSongs = this.container?.querySelector('.drop-down-music-list')
         this.dropDownSongsList = this.dropDownSongs.querySelector('nav')
-        this.dropDownSongsSelected = this.dropDownSongs.querySelector('.toggle-dropdown-music-list > div')
+        this.dropDownSongsCurrentTitle = this.dropDownSongs.querySelector('.toggle-dropdown-music-list > .musicplayer-track-title')
+        this.dropDownSongsCurrentID = this.dropDownSongs.querySelector('.toggle-dropdown-music-list > .musicplayer-track-id')
+        this.currentTrackTitle = this.dropDownSongs.querySelector('.music-playback > div')
         this.dropDownSongsList?.replaceChildren()
 
         for(let i =0; i < this.playlist.tracks.length; i++) {
             const t = this.playlist.tracks[i]
             const a = document.createElement('a')
             a.classList.add('musicplayer-dropdown-row', 'w-dropdown-link')
-            a.innerText = t.title
             a.setAttribute('draggable', 'false')
             a.addEventListener('click', e => {
                 e.preventDefault()
                 this.setTrack(i)
                 this.closeDropDown(this.dropDownSongs)
             })
+            const title = document.createElement('span')
+            title.innerText = t.title
+            const index = document.createElement('span')
+            index.innerText = `<${i.toString().padStart(2,'0')}>`
+            a.appendChild(title)
+            a.appendChild(index)
             this.dropDownSongsList.appendChild(a)
         }
 
@@ -94,7 +101,9 @@ export class MusicPlayer {
     setTrack(id) {
         this.currentTrackID = id
         this.currentTrack = this.playlist.tracks[id]
-        this.dropDownSongsSelected.innerText = this.currentTrack.title
+        this.dropDownSongsCurrentTitle.innerText = this.currentTrack.title
+        this.dropDownSongsCurrentID.innerText = `<${id.toString().padStart(2, '0')}>`
+        this.currentTrackTitle.innerText = `${id}. ${this.currentTrack.title}`
     }
 
     close() {
