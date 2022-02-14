@@ -106,6 +106,14 @@ export class MusicPlayer {
         // Audio
         this.audio = document.createElement('audio')
 
+        this.audio.addEventListener('pause', e => {
+            this.paused = true
+        })
+
+        this.audio.addEventListener('ended', e => {
+            this.nextTrack()
+        })
+
         this.audio.addEventListener('timeupdate', e => {
             const time = this.formatTime(this.audio.currentTime)
             if (this.displayCurrentTime) this.displayCurrentTime.innerText = `${time.min}:${time.sec}`
@@ -191,6 +199,8 @@ export class MusicPlayer {
     }
 
     close() {
+        this.audio.pause()
+        this.audio.currentTime = null
         this.container.style.display = 'none'
         this.container.classList.remove('maximized')
     }
