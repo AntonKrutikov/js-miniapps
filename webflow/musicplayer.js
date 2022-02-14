@@ -69,7 +69,7 @@ export class MusicPlayer {
         this.audio = document.createElement('audio')
 
 
-
+        this.setTrack(0)
         this.assignMenu()
     }
 
@@ -105,9 +105,9 @@ export class MusicPlayer {
     setTrack(id) {
         this.currentTrackID = id
         this.currentTrack = this.playlist.tracks[id]
-        this.dropDownSongsCurrentTitle?.innerText = this.currentTrack.title
-        this.dropDownSongsCurrentID?.innerText = `<${id.toString().padStart(2, '0')}>`
-        this.currentTrackTitle?.innerText = `${id}. ${this.currentTrack.title}`
+        if (this.dropDownSongsCurrentTitle) this.dropDownSongsCurrentTitle.innerText = this.currentTrack.title
+        if (this.dropDownSongsCurrentID) this.dropDownSongsCurrentID.innerText = `<${id.toString().padStart(2, '0')}>`
+        if (this.currentTrackTitle) this.currentTrackTitle.innerText = `${id}. ${this.currentTrack.title}`
     }
 
     close() {
