@@ -52,6 +52,7 @@ export class MusicPlayer {
                 this.setTrack(i)
                 this.closeDropDown(this.dropDownSongs)
             })
+            this.dropDownSongsList.appendChild(a)
         }
 
         // Audio
