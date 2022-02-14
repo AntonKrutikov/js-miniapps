@@ -26,4 +26,24 @@ export class MusicPlayer {
         })
     }
 
+    assignMenu() {
+        const menu = this.container.querySelector('.ui_menu_file')
+
+        menu?.querySelectorAll('.ui_menu_file_row').forEach(a => {
+            a.setAttribute('draggable', 'false')
+        })
+
+        const quit = menu?.querySelector('.ui_menu_quit')
+        quit?.addEventListener('click', e => {
+            e.preventDefault()
+            menu?.parentElement?.dispatchEvent(new Event('w-close'))
+            this.close()
+        })
+    }
+
+    close() {
+        this.container.style.display = 'none'
+        this.container.classList.remove('maximized')
+    }
+
 }

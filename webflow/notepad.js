@@ -15,6 +15,9 @@ export class Notepad {
     }
 
     assignMenu() {
+        this.container.querySelectorAll('.ui_menu_file_row').forEach(a => {
+            a.setAttribute('draggable', 'false')
+        })
         const newFile = this.container.querySelector('.ui_menu_new')
         const saveFile = this.container.querySelector('.ui_menu_save')
         const saveFileAs = this.container.querySelector('.ui_menu_save_as')
@@ -22,7 +25,6 @@ export class Notepad {
         const all = [newFile, saveFile, saveFileAs, quit]
         const menu = this.container.querySelector('.ui_menu_file')
         all.forEach(m => {
-            m?.setAttribute('draggable', 'false')
             m?.addEventListener('click', e => {
                 e.preventDefault()
                 menu?.parentElement?.dispatchEvent(new Event('w-close'))
