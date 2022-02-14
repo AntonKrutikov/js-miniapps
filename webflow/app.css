@@ -55,6 +55,7 @@
     padding-right: 15px;
 }
 .ui_window_music .range-volume {
+    grid-area: span 1 / span 5 / span 1 / span 5;
     -webkit-appearance: none;
     height: 4px;
     align-self: center;
