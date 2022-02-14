@@ -179,7 +179,7 @@ export class MusicPlayer {
     }
 
     nextTrack() {
-        if (this.currentTrackID < this.playlist.tracks.length) {
+        if (this.currentTrackID < this.playlist.tracks.length - 1) {
             this.setTrack(this.currentTrackID + 1)
         }
     }
