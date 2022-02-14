@@ -8,5 +8,11 @@ window.addEventListener('load', e => {
 
     const notepad = new Notepad('.ui_window_notepad')
 
-    const musicplayer = new MusicPlayer('.ui_window_music')
+    const playlist = {
+        artist: 'Shadow Pals',
+        tracks: [
+            {src: '123', title: 'test track'}
+        ]
+    }
+    const musicplayer = new MusicPlayer('.ui_window_music', playlist)
 })

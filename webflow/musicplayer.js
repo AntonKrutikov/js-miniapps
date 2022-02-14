@@ -1,6 +1,8 @@
 export class MusicPlayer {
-    constructor(selector) {
+    constructor(selector, playlist) {
         this.container = document.querySelector(selector)
+        this.playlist = playlist ? playlist : {artist: '', tracks: []}
+        this.currentTrackID = 0
 
         // Buttons
         this.btnPrev = this.container?.querySelector('.button-controls-previous')
@@ -25,6 +27,37 @@ export class MusicPlayer {
             })
         })
 
+        // Lists
+        this.dropDownArtist = this.container?.querySelector('.drop-down-artist')
+        this.dropDownArtist?.querySelectorAll('.musicplayer-dropdown-row').forEach(a => {
+            a?.addEventListener('click', e => {
+                this.closeDropDown(this.dropDownArtist)
+            })
+        })
+
+        this.dropDownSongs = this.container?.querySelector('.drop-down-music-list')
+        this.dropDownSongsList = this.dropDownSongs.querySelector('nav')
+        this.dropDownSongsSelected = this.dropDownSongs.querySelector('.toggle-dropdown-music-list > div')
+        this.dropDownSongsList?.replaceChildren()
+
+        for(let i =0; i < this.playlist.tracks.length; i++) {
+            const t = this.playlist.tracks[i]
+            const a = document.createElement('a')
+            a.classList.add('musicplayer-dropdown-row', 'w-dropdown-link')
+            a.innerText = t.title
+            a.setAttribute('draggable', 'false')
+            a.addEventListener('click', e => {
+                e.preventDefault()
+                this.setTrack(i)
+                this.closeDropDown(this.dropDownSongs)
+            })
+        }
+
+        // Audio
+        this.audio = document.createElement('audio')
+
+
+
         this.assignMenu()
     }
 
@@ -41,6 +74,23 @@ export class MusicPlayer {
             menu?.parentElement?.dispatchEvent(new Event('w-close'))
             this.close()
         })
+    }
+
+    closeDropDown(dropDown) {
+        dropDown?.dispatchEvent(new Event('w-close'))
+    }
+
+    formatTime(sec) {
+        sec = Math.floor( sec );
+        let min = Math.floor( sec / 60 );
+        min = min >= 10 ? min : '0' + min;
+        sec = Math.floor( sec % 60 );
+        sec = sec >= 10 ? sec : '0' + sec;
+        return {min: min, sec: sec}
+    }
+
+    setTrack(id) {
+        this.currentTrackID(id)
     }
 
     close() {
