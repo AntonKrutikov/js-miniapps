@@ -2,6 +2,7 @@ import { Notepad } from './notepad.js'
 import {WindowManager} from './window.js'
 import {MusicPlayer} from './musicplayer.js'
 
+
 window.addEventListener('load', e => {
     const wm = new WindowManager()
     wm.init()

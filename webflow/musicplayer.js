@@ -214,6 +214,7 @@ export class MusicPlayer {
 
     close() {
         this.audio.pause()
+        this.paused = true
         this.setTrack(0)
         this.container.style.display = 'none'
         this.container.classList.remove('maximized')
