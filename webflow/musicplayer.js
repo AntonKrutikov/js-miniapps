@@ -15,6 +15,11 @@ export class MusicPlayer {
         this.btnStop = this.container?.querySelector('.button-controls-stop')
         this.btnArtistList = this.container?.querySelector('.toggle-dropdown-artist .dropdown-button')
         this.btnMusicList = this.container?.querySelector('.toggle-dropdown-music-list .dropdown-button')
+        this.btnClose = this.container?.querySelector('.ui_window__head__close')
+
+        this.btnClose?.addEventListener('click', e => {
+            this.close()
+        })
 
         const buttons = [this.btnPrev, this.btnPlay, this.btnNext, this.btnPause, this.btnStop, this.btnArtistList, this.btnMusicList]
         buttons.forEach(b => {
