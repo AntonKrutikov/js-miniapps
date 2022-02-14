@@ -45,3 +45,9 @@
 .ui_window_notepad textarea:focus {
     outline: none;
 }
+
+
+/* MusicPlayer */
+.musicplayer-dropdown-row a {
+    flex: 1;
+}
