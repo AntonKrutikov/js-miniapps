@@ -46,6 +46,14 @@ export class MusicPlayer {
             this.paused = true
         })
 
+        this.btnPrev?.addEventListener('click', e => {
+            this.prevTrack()
+        })
+
+        this.btnNext?.addEventListener('click', e => {
+            this.nextTrack()
+        })
+
         // Lists
         this.dropDownArtist = this.container?.querySelector('.drop-down-artist')
         this.dropDownArtistList = this.dropDownArtist?.querySelector('nav')
@@ -165,6 +173,18 @@ export class MusicPlayer {
         this.audio.src = this.currentTrack.src
         if (!this.paused) {
             this.audio.play()
+        }
+    }
+
+    nextTrack() {
+        if (this.currentTrackID < this.playlist.tracks.length) {
+            this.setTrack(this.currentTrackID + 1)
+        }
+    }
+
+    prevTrack() {
+        if (this.currentTrackID > 0) {
+            this.setTrack(this.currentTrackID - 1)
         }
     }
 
