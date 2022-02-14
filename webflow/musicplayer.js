@@ -59,6 +59,7 @@ export class MusicPlayer {
         this.dropDownArtistList = this.dropDownArtist?.querySelector('nav')
         this.dropDownArtistList?.replaceChildren()
         this.dropDownArtistCurrentTitle = this.dropDownArtist?.querySelector('.toggle-dropdown-artist > div')
+        this.dropDownSongsCurrentTitle?.innerText = this.playlist?.artist
         const artistRow = document.createElement('a')
         artistRow.classList.add('musicplayer-dropdown-row', 'w-dropdown-link')
         artistRow.setAttribute('draggable', 'false')
@@ -89,7 +90,7 @@ export class MusicPlayer {
             title.classList.add('musicplayer-dropdown-row-title')
             title.innerText = t.title
             const index = document.createElement('span')
-            index.innerText = `<${i.toString().padStart(2,'0')}>`
+            index.innerText = `<${(i+1).toString().padStart(2,'0')}>`
             index.classList.add('musicplayer-dropdown-row-id')
             a.appendChild(title)
             a.appendChild(index)
@@ -200,7 +201,7 @@ export class MusicPlayer {
 
     close() {
         this.audio.pause()
-        this.audio.currentTime = null
+        this.setTrack(0)
         this.container.style.display = 'none'
         this.container.classList.remove('maximized')
     }
