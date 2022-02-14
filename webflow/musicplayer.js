@@ -5,6 +5,7 @@ export class MusicPlayer {
         this.currentTrackID = 0
         this.currentTrack = undefined
         this.paused = true
+        this.totalDuration = 0
 
         // Buttons
         this.btnPrev = this.container?.querySelector('.button-controls-previous')
@@ -95,6 +96,23 @@ export class MusicPlayer {
         this.audio.addEventListener('timeupdate', e => {
             const time = this.formatTime(this.audio.currentTime)
             if (this.displayCurrentTime) this.displayCurrentTime.innerText = `${time.min}:${time.sec}`
+        })
+
+        this.audio.addEventListener('loadedmetadata', e => {
+            const time = this.formatTime(this.audio.duration)
+            this.trackTime.innerText = `${time.min}:${time.sec}`
+        })
+
+        this.playlist?.tracks?.forEach(t => {
+            let temp = document.createElement('audio')
+            temp.src = t.src
+            temp.preload = 'metadata';
+            temp.addEventListener('loadedmetadata', e => {
+                this.totalDuration += temp.duration
+                const time = this.formatTime(this.totalDuration)
+                this.totalTime.innerText = `${time.min}:${time.sec}`
+                document.removeChild(temp)
+            })
         })
 
 
