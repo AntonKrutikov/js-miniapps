@@ -48,12 +48,17 @@ export class MusicPlayer {
 
         // Lists
         this.dropDownArtist = this.container?.querySelector('.drop-down-artist')
-        this.dropDownArtist?.querySelectorAll('.musicplayer-dropdown-row').forEach(a => {
-            a?.setAttribute('draggable', 'false')
-            a?.addEventListener('click', e => {
-                this.closeDropDown(this.dropDownArtist)
-            })
+        this.dropDownArtistList = this.dropDownArtist?.querySelector('nav')
+        this.dropDownArtistList?.replaceChildren()
+        this.dropDownArtistCurrentTitle = this.dropDownArtist?.querySelector('.toggle-dropdown-artist > div')
+        const artistRow = document.createElement('a')
+        artistRow.classList.add('musicplayer-dropdown-row', 'w-dropdown-link')
+        artistRow.setAttribute('draggable', 'false')
+        artistRow.innerText = this.playlist?.artist
+        artistRow.addEventListener('click', e => {
+            this.closeDropDown(this.dropDownArtist)
         })
+        this.dropDownArtistList.appendChild(artistRow)
 
         this.dropDownSongs = this.container?.querySelector('.drop-down-music-list')
         this.dropDownSongsList = this.dropDownSongs.querySelector('nav')
@@ -153,9 +158,9 @@ export class MusicPlayer {
         this.currentTrackID = id
         this.currentTrack = this.playlist.tracks[id]
         if (this.dropDownSongsCurrentTitle) this.dropDownSongsCurrentTitle.innerText = this.currentTrack.title
-        if (this.dropDownSongsCurrentID) this.dropDownSongsCurrentID.innerText = `<${id.toString().padStart(2, '0')}>`
+        if (this.dropDownSongsCurrentID) this.dropDownSongsCurrentID.innerText = `<${(id+1).toString().padStart(2, '0')}>`
         if (this.currentTrackTitle) this.currentTrackTitle.innerText = `${id+1}. ${this.currentTrack.title}`
-        if (this.displayCurrentID) this.displayCurrentID.innerText = `[${id+1}]`
+        if (this.displayCurrentID) this.displayCurrentID.innerText = `[${(id+1).toString().padStart(2, '0')}]`
 
         this.audio.src = this.currentTrack.src
         if (!this.paused) {
