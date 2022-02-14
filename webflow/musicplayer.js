@@ -220,7 +220,7 @@ export class MusicPlayer {
         this.container.style.display = 'none'
         this.container.classList.remove('maximized')
         const appPanel = document.querySelector('.content-active-apps .active-app-musicplayer')
-        appPanel?.style.display = 'none'
+        if (appPanel) appPanel.style.display = 'none'
     }
 
 }
