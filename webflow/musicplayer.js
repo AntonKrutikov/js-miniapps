@@ -82,8 +82,20 @@ export class MusicPlayer {
             this.dropDownSongsList.appendChild(a)
         }
 
+        // Display
+        this.displayCurrentID = this.container.querySelector('.block-counter-song > .number-song')
+        this.displayCurrentTime = this.container.querySelector('.block-counter-song > .time-song')
+
+        this.trackTime = this.container.querySelector('.counter-totaltrack')
+        this.totalTime = this.container.querySelector('.counter-totalplay')
+
         // Audio
         this.audio = document.createElement('audio')
+
+        this.audio.addEventListener('timeupdate', e => {
+            const time = this.formatTime(this.audio.currentTime)
+            if (this.displayCurrentTime) this.displayCurrentTime.innerText = `${time.min}:${time.sec}`
+        })
 
 
         this.setTrack(0)
@@ -124,9 +136,13 @@ export class MusicPlayer {
         this.currentTrack = this.playlist.tracks[id]
         if (this.dropDownSongsCurrentTitle) this.dropDownSongsCurrentTitle.innerText = this.currentTrack.title
         if (this.dropDownSongsCurrentID) this.dropDownSongsCurrentID.innerText = `<${id.toString().padStart(2, '0')}>`
-        if (this.currentTrackTitle) this.currentTrackTitle.innerText = `${id}. ${this.currentTrack.title}`
+        if (this.currentTrackTitle) this.currentTrackTitle.innerText = `${id+1}. ${this.currentTrack.title}`
+        if (this.displayCurrentID) this.displayCurrentID.innerText = `[${id+1}]`
 
         this.audio.src = this.currentTrack.src
+        if (!this.paused) {
+            this.audio.play()
+        }
     }
 
     close() {
