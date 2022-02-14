@@ -22,6 +22,7 @@ export class Notepad {
         const all = [newFile, saveFile, saveFileAs, quit]
         const menu = this.container.querySelector('.ui_menu_file')
         all.forEach(m => {
+            m?.setAttribute('draggable', 'false')
             m?.addEventListener('click', e => {
                 e.preventDefault()
                 menu?.parentElement?.dispatchEvent(new Event('w-close'))
