@@ -16,7 +16,7 @@ export class WindowManager {
             // zIndexing
             this.zIndexing(w)
             // Draggable
-            this.makeDragable(w)
+            this.makeDraggable(w)
             // Buttons animation and events stop
             this.decorateButtons(w)
             // Maximize
@@ -40,7 +40,7 @@ export class WindowManager {
         return Math.min(Math.max(n, 0), window.innerHeight);
     }
 
-    makeDragable(w) {
+    makeDraggable(w) {
         let head = w?.querySelector('.head-ui-window')
 
         head?.addEventListener('mousedown', e => {

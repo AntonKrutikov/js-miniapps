@@ -11,8 +11,9 @@ export class MusicPlayer {
         this.btnArtistList = this.container?.querySelector('.toggle-dropdown-artist .dropdown-button')
         this.btnMusicList = this.container?.querySelector('.toggle-dropdown-music-list .dropdown-button')
 
-        const buttons = [this.btnPlay, this.btnPlay, this.btnNext, this.btnPause, this.btnStop, this.btnArtistList, this.btnMusicList]
+        const buttons = [this.btnPrev, this.btnPlay, this.btnNext, this.btnPause, this.btnStop, this.btnArtistList, this.btnMusicList]
         buttons.forEach(b => {
+            b?.setAttribute('draggable', 'false')
             b?.addEventListener('mousedown', e => {
                 b.classList.add('button-pushed')
             })
