@@ -31,6 +31,7 @@ export class MusicPlayer {
         // Lists
         this.dropDownArtist = this.container?.querySelector('.drop-down-artist')
         this.dropDownArtist?.querySelectorAll('.musicplayer-dropdown-row').forEach(a => {
+            a?.setAttribute('draggable', 'false')
             a?.addEventListener('click', e => {
                 this.closeDropDown(this.dropDownArtist)
             })
@@ -40,7 +41,7 @@ export class MusicPlayer {
         this.dropDownSongsList = this.dropDownSongs.querySelector('nav')
         this.dropDownSongsCurrentTitle = this.dropDownSongs.querySelector('.toggle-dropdown-music-list > .musicplayer-track-title')
         this.dropDownSongsCurrentID = this.dropDownSongs.querySelector('.toggle-dropdown-music-list > .musicplayer-track-id')
-        this.currentTrackTitle = this.dropDownSongs.querySelector('.music-playback > div')
+        this.currentTrackTitle = this.container.querySelector('.music-playback > div')
         this.dropDownSongsList?.replaceChildren()
 
         for(let i =0; i < this.playlist.tracks.length; i++) {
@@ -104,9 +105,9 @@ export class MusicPlayer {
     setTrack(id) {
         this.currentTrackID = id
         this.currentTrack = this.playlist.tracks[id]
-        this.dropDownSongsCurrentTitle.innerText = this.currentTrack.title
-        this.dropDownSongsCurrentID.innerText = `<${id.toString().padStart(2, '0')}>`
-        this.currentTrackTitle.innerText = `${id}. ${this.currentTrack.title}`
+        this.dropDownSongsCurrentTitle?.innerText = this.currentTrack.title
+        this.dropDownSongsCurrentID?.innerText = `<${id.toString().padStart(2, '0')}>`
+        this.currentTrackTitle?.innerText = `${id}. ${this.currentTrack.title}`
     }
 
     close() {
