@@ -51,3 +51,6 @@
 .musicplayer-dropdown-row-title {
     flex: 1;
 }
+.musicplayer-dropdown-row-id {
+    padding-right: 15px;
+}

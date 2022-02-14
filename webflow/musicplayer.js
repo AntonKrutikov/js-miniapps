@@ -54,9 +54,11 @@ export class MusicPlayer {
                 this.closeDropDown(this.dropDownSongs)
             })
             const title = document.createElement('span')
+            title.classList.add('musicplayer-dropdown-row-title')
             title.innerText = t.title
             const index = document.createElement('span')
             index.innerText = `<${i.toString().padStart(2,'0')}>`
+            index.classList.add('musicplayer-dropdown-row-id')
             a.appendChild(title)
             a.appendChild(index)
             this.dropDownSongsList.appendChild(a)
@@ -86,6 +88,7 @@ export class MusicPlayer {
     }
 
     closeDropDown(dropDown) {
+        console.log('close', dropDown)
         dropDown?.dispatchEvent(new Event('w-close'))
     }
 
