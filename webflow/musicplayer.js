@@ -124,7 +124,7 @@ export class MusicPlayer {
                 this.totalDuration += temp.duration
                 const time = this.formatTime(this.totalDuration)
                 this.totalTime.innerText = `${time.min}:${time.sec}`
-                document.removeChild(temp)
+                temp.remove()
             })
         })
 
