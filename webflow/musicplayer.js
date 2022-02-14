@@ -114,10 +114,6 @@ export class MusicPlayer {
         // Audio
         this.audio = document.createElement('audio')
 
-        this.audio.addEventListener('pause', e => {
-            this.paused = true
-        })
-
         this.audio.addEventListener('ended', e => {
             this.nextTrack()
         })
@@ -218,6 +214,8 @@ export class MusicPlayer {
         this.setTrack(0)
         this.container.style.display = 'none'
         this.container.classList.remove('maximized')
+        const appPanel = document.querySelector('.content-active-apps .active-app-musicplayer')
+        appPanel?.style.display = 'none'
     }
 
 }

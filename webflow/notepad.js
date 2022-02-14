@@ -52,5 +52,7 @@ export class Notepad {
         this.textarea.value = ''
         this.container.style.display = 'none'
         this.container.classList.remove('maximized')
+        const appPanel = document.querySelector('.content-active-apps .active-app-notepad')
+        appPanel?.style.display = 'none'
     }
 }
