@@ -1,5 +1,5 @@
 export class Paint {
-    constructor(selector) {
+    constructor(selector, config) {
         this.container = document.querySelector('.ui_window_paint')
         this.currentTool = undefined
         this.prev_x = 0
@@ -7,9 +7,11 @@ export class Paint {
         this.cur_x = 0
         this.cur_y = 0
         this.draw_start = false
+        this.steps = [[1, 0], [0, 1], [0, -1], [-1, 0]]
+        this.fill_ways = this.steps.length
 
-        this.colorFirst = '#000'
-        this.colorSecond = '#fff'
+        this.colorFirst = 'rgba(0,0,0,255)'
+        this.colorSecond = 'rgba(255,255,255,255)'
 
         this.colors = {}
 
@@ -19,6 +21,8 @@ export class Paint {
             font: '14px "Ms sans serif 8pt"',
             lineHeight: 16
         }
+
+        Object.assign(this.config, config)
 
         this.canvas = document.createElement('canvas')
         this.ctx = this.canvas.getContext('2d')
@@ -206,14 +210,14 @@ export class Paint {
 
             const y = e.pageY - bounds.top
             const x = e.pageX - bounds.left
-            text.style.top = `${y - this.config.lineHeight/2}px`
+            text.style.top = `${y - this.config.lineHeight / 2}px`
             text.style.left = `${x}px`
             text.addEventListener('click', te => {
                 te.stopPropagation()
                 inside = true
             })
             text.addEventListener('blur', be => {
-                this.fillTextMultiLine(text.value, x + 1, y + this.config.lineHeight/2 - 2.5)
+                this.fillTextMultiLine(text.value, x + 1, y + this.config.lineHeight / 2 - 2.5)
                 text.remove()
             })
             text.addEventListener('input', ie => {
@@ -240,6 +244,91 @@ export class Paint {
             y += lineHeight;
         }
         this.ctx.restore()
+    }
+
+    pointOffset(x,y,width) {
+        return 4 * (y * width + x)
+    }
+
+    colorParts(color) {
+        if (color.toString().startsWith('rgb')) {
+            const color = this.colorFirst.replace(/[^\d,]/g, '').split(',').map(i => parseInt(i))
+            if(color.length < 4) {
+                color.push(255)
+            }
+            return color
+        }
+    }
+
+    tolerance_equal(array_one, offset, array_two, tolerance) {
+        var length = array_two.length,
+        start = offset + length;
+        
+        tolerance = tolerance || 0;
+        
+        // Iterate (in reverse) the items being compared in each array, checking their values are 
+        // within tolerance of each other
+        while(start-- && length--) {
+            if(Math.abs(array_one[start] - array_two[length]) > tolerance) {
+                return false;
+        
+            }
+        }
+        // console.log('not diff')
+        
+        return true;
+    }
+
+    floodFill(imageData, point, colour, target, tolerance, width, height) {
+        const image_data = imageData.data
+        var points = [point],
+            seen = {},
+            steps = this.steps,
+            key,
+            x,
+            y,
+            offset,
+            i,
+            x2,
+            y2;
+        
+        // Keep going while we have points to walk
+        while(!!(point = points.pop())) {
+            x = point.x;
+            y = point.y;
+            offset = this.pointOffset(x, y, imageData.width);
+            
+            // Move to next point if this pixel isn't within tolerance of the colour being filled
+            if(!this.tolerance_equal(image_data, offset, target, tolerance)) {
+                continue;
+            }
+            
+            // Update the pixel to the fill colour and add neighbours onto stack to traverse 
+            // the fill area
+            i = this.fill_ways;
+            while(i--) {
+                // Use the same loop for setting RGBA as for checking the neighbouring pixels
+                if(i < 4) {
+                    image_data[offset + i] = colour[i];
+                    // console.log( image_data[offset + i], offset, i)
+                }
+            
+                // Get the new coordinate by adjusting x and y based on current step
+                x2 = x + steps[i][0];
+                y2 = y + steps[i][1];
+                key = x2 + ',' + y2;
+                
+                // If new coordinate is out of bounds, or we've already added it, then skip to 
+                // trying the next neighbour without adding this one
+                if(x2 < 0 || y2 < 0 || x2 >= width || y2 >= height || seen[key]) {
+                    continue;
+                }
+                
+                // Push neighbour onto points array to be processed, and tag as seen
+                points.push({ x: x2, y: y2 });
+                seen[key] = true;
+            }
+        }
     }
 
     resetTool() {
@@ -293,8 +382,26 @@ export class Paint {
         this.erase()
 
         this.canvas.addEventListener('click', e => {
-            if(this.currentTool === 'pot') {
-   
+            if (this.currentTool === 'pot') {
+                const bounds = this.canvas.getBoundingClientRect();
+                const cssScale = bounds.width / this.canvas.offsetWidth;
+                const x = Math.floor((e.pageX - bounds.left) * this.scale / cssScale)
+                const y = Math.floor((e.pageY - bounds.top) * this.scale / cssScale)
+
+                console.log(x,y,cssScale)
+          
+                let imageData = this.ctx.getImageData(0,0,this.canvas.width, this.canvas.height)
+                let target_offset = this.pointOffset(x, y, this.canvas.width)
+                let target = imageData.data.slice(target_offset, target_offset + 4)
+                const tolerance = 10
+
+                const color = this.colorParts(this.colorFirst)
+                if(this.tolerance_equal(target, 0, color, 1)) {
+                    return;
+                }
+
+                this.floodFill(imageData, {x:x, y:y}, color, target, tolerance, this.canvas.width, this.canvas.height)
+                this.ctx.putImageData(imageData, 0, 0);
             }
         })
         this.canvas.addEventListener('mousedown', (e) => {
@@ -314,11 +421,11 @@ export class Paint {
         })
 
         this.canvas.addEventListener('mousemove', (e) => {
-            let bounds = this.canvas.getBoundingClientRect();
+            const bounds = this.canvas.getBoundingClientRect();
             this.prev_x = this.cur_x
             this.prev_y = this.cur_y
-            this.cur_x = e.pageX - bounds.left
-            this.cur_y = e.pageY - bounds.top
+            this.cur_x = (e.pageX - bounds.left)
+            this.cur_y = (e.pageY - bounds.top)
 
             if (this.draw_start === true) {
                 this.ctx.lineTo(this.cur_x, this.cur_y)

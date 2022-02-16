@@ -20,5 +20,10 @@ window.addEventListener('load', e => {
     }
     const musicplayer = new MusicPlayer('.ui_window_music', playlist)
 
-    const paint = new Paint('.ui_window_paint')
+    const paint = new Paint('.ui_window_paint', {
+        pencilSize: 1,
+        eraserSize: 8,
+        font: '14px "Ms sans serif 8pt"',
+        lineHeight: 16
+    })
 })
