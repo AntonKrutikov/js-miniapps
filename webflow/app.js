@@ -1,6 +1,7 @@
 import { Notepad } from './notepad.js'
 import {WindowManager} from './window.js'
 import {MusicPlayer} from './musicplayer.js'
+import { Paint } from './paint.js'
 
 
 window.addEventListener('load', e => {
@@ -18,4 +19,6 @@ window.addEventListener('load', e => {
         ]
     }
     const musicplayer = new MusicPlayer('.ui_window_music', playlist)
+
+    const paint = new Paint('.ui_window_paint')
 })
